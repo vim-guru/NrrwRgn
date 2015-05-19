@@ -154,6 +154,7 @@ fun! <sid>NrrwRgnWin(bang) abort "{{{1
 		noa wincmd p
 		" focus: target window
 	endif
+	silent! doautocmd User NrrwRgnEnter
 	" We are in the narrowed buffer now!
 	return nrrw_win
 endfun
@@ -1364,6 +1365,7 @@ fun! nrrwrgn#WidenRegion(force)  abort "{{{1
 	let bufnr = bufnr('')
 	" jump back to narrowed window
 	call <sid>JumpToBufinTab(orig_tab, nrw_buf, instn, s:window_type["target"])
+	silent! doautocmd User GoyoLeave
 	if bufnr('') != bufnr
 		" do not set the original buffer unmodified
 		setl nomod
